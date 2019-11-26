@@ -8,12 +8,12 @@ const mysql 	= require('mysql')
 // todas definições importantes são feitas aqui
 
 const users 			= express.Router()
-const db_limit 		= 15
-const db_host			= 'mysql.devisate.com.br'
+const db_limit 			= 15
+const db_host			= 'localhost'
 const db_port			= 3306
-const db_user			= 'devisate04'
-const db_password	= 'v1z3h0b3k1'
-const db_name			= 'devisate04'
+const db_user			= 'root'
+const db_password		= ''
+const db_name			= 'skeelo'
 
 users.use(express.json());
 
@@ -326,9 +326,9 @@ users.get('/users/zip/contains/:zip', (req, res) => {
 users.post('/users/create', (req, res) => {
 	const userName 			= req.body.user_name
 	const userEmail 		= req.body.user_email
-	const userPassword 	= req.body.user_password
-	const userBirthdate = req.body.user_birthdate
-	const userCountry 	= req.body.user_country
+	const userPassword 		= req.body.user_password
+	const userBirthdate 	= req.body.user_birthdate
+	const userCountry 		= req.body.user_country
 	const userPhone 		= req.body.user_phone
 	const userCpf 			= req.body.user_cpf
 	const userZip 			= req.body.user_zip
@@ -387,36 +387,29 @@ users.put('/users/update/:id', (req, res) => {
 
 	const userName 			= req.body.user_name
 	const userEmail 		= req.body.user_email
-	const userPassword 	= req.body.user_password
-	const userBirthdate = req.body.user_birthdate
-	const userCountry 	= req.body.user_country
-	const userPhone 		= req.body.user_phone
-	const userCpf 			= req.body.user_cpf
+	const userPassword 		= req.body.user_password
+	const userCountry 		= req.body.user_country
 	const userZip 			= req.body.user_zip
 
 	const queryArray = [
 		userName,
 		userEmail,
 		userPassword,
-		userBirthdate,
-		userCountry,
-		userPhone,
-		userCpf,
 		userZip,
 		userId
 	]
 
-	const queryString = "UPDATE users SET (user_name = ?, user_email = ?, user_password = ?, user_birthdate = ?, user_country = ?, user_phone = ?, user_cpf = ?, user_zip = ?) WHERE user_id = ?"
+	const queryString = "UPDATE users SET user_name = ?, user_email = ?, user_password = ?, user_zip = ? WHERE user_id = ?"
 	const connection = getConnection()
 	
 	connection.query(queryString, queryArray, (err, rows, fields) => {
 		if(err) {
 			console.log("[" + getTimestamp() + "][server] failed to update user: " + JSON.stringify(err, undefined, 2))
-			res.sendStatus(500)
+			res.sendStatus(500) 
 			return
 		}
 		
-		res.sendStatus(200)
+		res.status(201).send("201")
 		console.log("[" + getTimestamp() + "][server] succeeded to update users")
 	})
 })

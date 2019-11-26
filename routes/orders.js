@@ -8,12 +8,12 @@ const mysql 	= require('mysql')
 // todas definições importantes são feitas aqui
 
 const orders 			= express.Router()
-const db_limit 		= 15
-const db_host			= 'mysql.devisate.com.br'
+const db_limit 			= 15
+const db_host			= 'localhost'
 const db_port			= 3306
-const db_user			= 'devisate04'
-const db_password	= 'v1z3h0b3k1'
-const db_name			= 'devisate04'
+const db_user			= 'root'
+const db_password		= ''
+const db_name			= 'skeelo'
 
 orders.use(express.json());
 
