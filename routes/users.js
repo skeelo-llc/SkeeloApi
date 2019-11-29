@@ -1,5 +1,6 @@
-const express = require('express')
-const mysql 	= require('mysql')
+const database 	= require('./db')
+const express 	= require('express')
+const mysql 		= require('mysql')
 
 /////////////////
 // definitions //
@@ -8,12 +9,12 @@ const mysql 	= require('mysql')
 // todas definições importantes são feitas aqui
 
 const users 			= express.Router()
-const db_limit 			= 15
-const db_host			= 'localhost'
-const db_port			= 3306
-const db_user			= 'root'
-const db_password		= ''
-const db_name			= 'skeelo'
+const db_limit 		= database.limit
+const db_host			= database.host
+const db_port			= database.port
+const db_user			= database.user
+const db_password	= database.password
+const db_name			= database.name
 
 users.use(express.json());
 
