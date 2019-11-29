@@ -44,3 +44,53 @@ const pool = mysql.createPool({
 function getConnection() {
 	return pool
 }
+
+
+////////////////////////
+// get all categories //
+////////////////////////
+
+categories.get('/categories', (req, res) => {
+	console.log("[" + getTimestamp() + "][server] getting all items")
+
+	const connection = getConnection()
+	const queryString = "SELECT * FROM categories"
+
+	connection.query(queryString, (err, rows, fields) => {
+		if(err) {
+			console.log("[" + getTimestamp() + "][server] failed to query for categories: " + JSON.stringify(err, undefined, 2))
+			res.sendStatus(500)
+			return
+		}
+
+		console.log("[" + getTimestamp() + "][server] succeeded to query for categories")
+		res.json(rows)
+	})
+})
+
+
+////////////////////////
+// get category by id //
+////////////////////////
+
+categories.get('/categories/id/:id', (req, res) => {
+	const categoryId = req.params.id
+	console.log("[" + getTimestamp() + "][server] getting categorie with id: " + categoryId)
+
+	const connection = getConnection()
+	const queryString = "SELECT * FROM categories WHERE category_id = ?"
+
+	connection.query(queryString, [categoryId], (err, rows, fields) => {
+		if(err) {
+			console.log("[" + getTimestamp() + "][server] failed to query for category: " + JSON.stringify(err, undefined, 2))
+			res.sendStatus(500)
+			return
+		}
+
+		console.log("[" + getTimestamp() + "][server] succeeded to query for category")
+		res.json(rows)
+	})
+})
+
+
+module.exports = categories
