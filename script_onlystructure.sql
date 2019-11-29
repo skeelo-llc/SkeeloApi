@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `skeelo` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `skeelo`;
+CREATE DATABASE  IF NOT EXISTS `teste` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `teste`;
 -- MySQL dump 10.13  Distrib 5.7.21, for Win64 (x86_64)
 --
 -- Host: localhost    Database: skeelo
@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categories` (
-  `category_id` int(11) NOT NULL COMMENT 'STOREID + CATEGORYID',
+  `category_tid` int(11) NOT NULL COMMENT 'STOREID + CATEGORYID',
   `category_name` varchar(45) NOT NULL,
   `category_description` tinytext,
   `category_store` int(11) NOT NULL,
@@ -51,6 +51,7 @@ CREATE TABLE `items` (
   `item_description` varchar(45) NOT NULL,
   `item_amount` varchar(45) NOT NULL,
   `item_price` varchar(45) NOT NULL,
+  `item_imageurl` varchar(120),
   `item_discount` tinyint(4) DEFAULT NULL,
   `item_discounttype` tinyint(4) DEFAULT NULL,
   `item_discountpercent` varchar(45) DEFAULT NULL,
@@ -60,7 +61,7 @@ CREATE TABLE `items` (
   KEY `item_category_idx` (`item_category`),
   CONSTRAINT `item_category` FOREIGN KEY (`item_category`) REFERENCES `categories` (`category_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `item_store` FOREIGN KEY (`item_store`) REFERENCES `stores` (`store_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +103,7 @@ CREATE TABLE `orderitems` (
   KEY `orderitems_order_idx` (`orderitems_order`),
   CONSTRAINT `orderitems_item` FOREIGN KEY (`orderitems_item`) REFERENCES `items` (`item_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `orderitems_order` FOREIGN KEY (`orderitems_order`) REFERENCES `orders` (`order_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +150,7 @@ CREATE TABLE `stores` (
   KEY `store_location_idx` (`store_location`),
   CONSTRAINT `store_location` FOREIGN KEY (`store_location`) REFERENCES `locations` (`location_cnpj`),
   CONSTRAINT `store_owner` FOREIGN KEY (`store_owner`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +171,7 @@ CREATE TABLE `users` (
   `user_cpf` bigint(11) DEFAULT NULL,
   `user_zip` int(8) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
