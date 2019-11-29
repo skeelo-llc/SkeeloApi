@@ -124,20 +124,24 @@ stores.get('/stores/:id', (req, res) => {
 /////////////////////
 
 stores.post('/stores/create', (req, res) => {
-	const storeName 		= req.body.store_name
-	const storeDisplay  = req.body.store_displayname
-	const storeCnpj  		= req.body.store_cnpj
-	const storePhone 		= req.body.store_phone
-	const storeOwner		= req.body.store_owner
-	const storeLocation = req.body.store_location
+	const storeName 			= req.body.store_name
+	const storeDisplay  	= req.body.store_displayname
+	const storeCnpj  			= req.body.store_cnpj
+	const storePhone 			= req.body.store_phone
+	const storeImg				= req.body.store_imageurl
+	const storeOwner			= req.body.store_owner
+	const storeLocation	 	= req.body.store_location
+	const storeTax				= req.body.store_deliverytax
 	
 	const queryArray = [
 		storeName,
 		storeDisplay,
 		storeCnpj,
 		storePhone,
+		storeImg,
 		storeOwner,
-		storeLocation
+		storeLocation,
+		storeTax
 	]
 	
 
@@ -149,15 +153,17 @@ stores.post('/stores/create', (req, res) => {
 	"store_displayname": "",
 	"store_cnpj":"",
 	"store_phone":"",
+	"store_imageurl": "",
 	"store_owner":"",
 	"store_location":""
+	"store_deliverytax": ""
 }
 	
 	*/
 
 
 	const connection = getConnection()
-	const queryString = "INSERT INTO stores (store_name, store_displayname, store_cnpj, store_phone, store_owner, store_location) VALUES (?, ?, ?, ?, ?, ?)"
+	const queryString = "INSERT INTO stores (store_name, store_displayname, store_cnpj, store_phone, store_imageurl, store_owner, store_location, store_deliverytax) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
 
 	connection.query(queryString, queryArray, (err, rows, fields) => {
 		if(err) {
