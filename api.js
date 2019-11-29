@@ -82,3 +82,6 @@ api.use(items)
 
 const orderitems = require('./routes/orderitems.js')
 api.use(orderitems)
+
+const categories = require('./routes/categories.js')
+api.use(categories)
